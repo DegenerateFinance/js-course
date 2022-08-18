@@ -1,7 +1,20 @@
-var words = ['Never', 'Gonna', 'Give', 'You', 'Up'];
+var button = document.getElementById("aa");
+var responseFromServer=undefined;
+button.onclick = function (){
+    window.alert("AAAAAA");
+    
+}
 
-var words2=[...words];
+const makeServerRequest = new Promise((resolve, reject) => {
+    // responseFromServer represents a response from a server
+    
+      
+    if(responseFromServer) {
+      resolve("We got the data");
+    } else {  
+      reject("Data not received");
+    }
+});
 
-words2.push("Never gonna desert you");
 
-console.log(words, words2);
+console.log(makeServerRequest)
