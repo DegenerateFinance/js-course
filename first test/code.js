@@ -1,20 +1,5 @@
-var button = document.getElementById("aa");
-var responseFromServer=undefined;
-button.onclick = function (){
-    window.alert("AAAAAA");
-    
-}
+let difficultSpelling = "Mississippisssss";
+let myRegex = /s+/ig; // Change this line
+let result = difficultSpelling.match(myRegex);
 
-const makeServerRequest = new Promise((resolve, reject) => {
-    // responseFromServer represents a response from a server
-    
-      
-    if(responseFromServer) {
-      resolve("We got the data");
-    } else {  
-      reject("Data not received");
-    }
-});
-
-
-console.log(makeServerRequest)
+console.log(result);
