@@ -19,7 +19,7 @@ function checkCashRegister(price, cash, cid) {
                 firstCall=1;
             }
             else{
-                returnValue.change[returnValue.change.length-1]+=Number(bills[i]);
+                returnValue.change[returnValue.change.length-1][1]+=Number(bills[i]);
             }
         }
     }

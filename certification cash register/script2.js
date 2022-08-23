@@ -1,4 +1,5 @@
 function checkCashRegister(price, cash, cid) {
+    let changeAmmount=cash-price;
     let returnValue={
         "status" : "OPEN",
         "change": []
@@ -8,14 +9,42 @@ function checkCashRegister(price, cash, cid) {
         "name":["ONE HUNDRED", "TWENTY", "TEN", "FIVE", "ONE", "QUARTER",
         "DIME", "NICKEL", "PENNY"]
     };
-
-    returnValue.change.push([currency.name[5], currency.value[5]+currency.value[5]]);
-    
-    console.log(typeof(returnValue.change[0][1]));
+    for(let i=0; i<=8;i++){
+        let firstCall=0;
+        while((changeAmmount+0.00001)>= currency.value[i] && cid[8-i][1]>0){ //float aproximation BS
+            changeAmmount -= currency.value[i];
+            cid [8-i][1] -= currency.value[i];
+            if(firstCall==0){
+                returnValue.change.push([currency.name[i], currency.value[i]]);
+                firstCall=1;
+            }
+            else{
+                returnValue.change[returnValue.change.length-1][1] += currency.value[i];
+            }
+        }
+    }
+    if(changeAmmount>0.000001){ //float aproximation BS
+        returnValue.status= "INSUFFICIENT_FUNDS";
+    }
+    else {
+        for(let i=0;i<=8;i++){
+            if(cid[i][1]==0){
+                returnValue.status = "CLOSED";
+            }else{
+                returnValue.status = "OPEN" ;
+                break;
+            }
+        }
+    }
     console.log(returnValue);
     return returnValue;
 }
 //
-checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], 
-["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], 
-["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], 
+["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], 
+["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
+
+/*
+checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], 
+["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], 
+["TWENTY", 0], ["ONE HUNDRED", 0]])*/
