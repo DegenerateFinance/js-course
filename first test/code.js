@@ -1,5 +1,5 @@
-let difficultSpelling = "Mississippisssss";
-let myRegex = /s+?u/ig; // Change this line
-let result = difficultSpelling.match(myRegex);
-
+let quoteSample = "The five boxing wizards jump quickly.";
+let alphabetRegexV2 = /\w/g; // Change this line
+console.log(quoteSample.match(alphabetRegexV2));
+let result = quoteSample.match(alphabetRegexV2).length;
 console.log(result);
