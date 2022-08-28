@@ -1,5 +1,3 @@
-let quoteSample = "The five boxing wizards jump quickly.";
-let alphabetRegexV2 = /\w/g; // Change this line
-console.log(quoteSample.match(alphabetRegexV2));
-let result = quoteSample.match(alphabetRegexV2).length;
-console.log(result);
+let username = "JackOfAllTrades";
+let userCheck = /^[a-z]\d\d+$|^[a-z][a-z]+\d*$/i; // Change this line
+let result = userCheck.test(username);
