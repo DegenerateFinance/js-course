@@ -1,3 +1,3 @@
-let username = "JackOfAllTrades";
-let userCheck = /^[a-z]\d\d+$|^[a-z][a-z]+\d*$/i; // Change this line
-let result = userCheck.test(username);
+let sampleWord = "astronaut";
+let pwRegex = /(?=\w{6,})(?=\w*\d{2})/; // Change this line
+let result = pwRegex.test(sampleWord);
