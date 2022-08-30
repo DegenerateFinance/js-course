@@ -1,6 +1,6 @@
 function telephoneCheck(str) {
-return true;
+    let myRegex=/d/;
+    return myRegex.test(str);
 }
-
 
 telephoneCheck("555-555-5555");
