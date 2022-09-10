@@ -1,5 +1,5 @@
 function telephoneCheck(str) {
-    let myRegex=/d/;
+    let myRegex=/^(1\s?)?(\d{3}|\(\d{3}\))\s?(\d{3}|\(\d{3}\)|-\d{3})\s?(\d{4}|\(\d{4}\)|-\d{4})$/;
     return myRegex.test(str);
 }
 
