@@ -15,8 +15,8 @@ possibleChoices.forEach(buttonChoice => buttonChoice.addEventListener("click", (
   userChoiceDisplay.innerHTML=userChoice;
   getUserImg(userChoice);
   generateComputerChoice();
-  getResult();
-  
+  getComputerImg(computerChoice);
+  resultAnimation(getResult());
 }))
 function getUserImg(choice){
   switch(choice){
@@ -29,7 +29,17 @@ function getUserImg(choice){
     default:  
   }
 }
-
+function getComputerImg(choice){
+  switch(choice){
+    case "rock": computerImg.style.backgroundImage = "url(images/rock.jpg)";
+      break;
+    case "paper": computerImg.style.backgroundImage = "url(images/paper.jpg)";
+      break;
+    case "scissors": computerImg.style.backgroundImage = "url(images/scissors.jpg)";
+      break;
+    default:  
+  }
+}
 function generateComputerChoice(){
   const rand1to3=Math.floor(Math.random()*3+1);
   switch (rand1to3){
@@ -67,3 +77,32 @@ function getResult(){
   resultDisplay.innerHTML = result;
   return result;
 }
+function resultAnimation(res){
+  switch (res){
+    case "You Win !":   
+      userImg.classList.add("spin2win");
+      delay(1000).then(() =>userImg.classList.remove("spin2win"));
+      computerImg.classList.add("knockout");
+
+      //onClick().then(() => computerImg.classList.remove("knockout"));
+      break;
+    case "You Lose !":
+
+
+      break;
+    default: 
+
+  }
+  return;
+}
+function delay(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
+/*
+function onClick() {
+  return new Promise(resolve => {
+    this.myButton.addEventListener('click',function(e) {
+     resolve("something");
+     });
+  });
+}*/
