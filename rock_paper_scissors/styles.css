@@ -46,7 +46,7 @@ img {
     0%{
     }
     100%{
-        transform: translateX(250px);
+        transform: scale(0.01,0.01);
     }
 }
 .spin2win{
@@ -60,4 +60,5 @@ img {
     animation-duration: 1s;
     animation-iteration-count: 1;
     animation-timing-function: linear;
+    animation-fill-mode: forwards;
 }

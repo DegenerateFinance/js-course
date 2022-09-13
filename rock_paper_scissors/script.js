@@ -15,6 +15,7 @@ possibleChoices.forEach(buttonChoice => buttonChoice.addEventListener("click", (
   userChoiceDisplay.innerHTML=userChoice;
   getUserImg(userChoice);
   generateComputerChoice();
+  reset_animation();
   getComputerImg(computerChoice);
   resultAnimation(getResult());
 }))
@@ -84,7 +85,6 @@ function resultAnimation(res){
       delay(1000).then(() =>userImg.classList.remove("spin2win"));
       computerImg.classList.add("knockout");
 
-      //onClick().then(() => computerImg.classList.remove("knockout"));
       break;
     case "You Lose !":
 
@@ -98,11 +98,12 @@ function resultAnimation(res){
 function delay(time) {
   return new Promise(resolve => setTimeout(resolve, time));
 }
-/*
-function onClick() {
-  return new Promise(resolve => {
-    this.myButton.addEventListener('click',function(e) {
-     resolve("something");
-     });
-  });
-}*/
+function reset_animation() {
+  userImg.style.animation = 'none';
+  userImg.offsetHeight; /* trigger reflow */
+  userImg.style.animation = null; 
+  computerImg.style.animation = 'none';
+  computerImg.offsetHeight; /* trigger reflow */
+  computerImg.style.animation = null; 
+  computerImg.classList.remove("knockout");
+}
