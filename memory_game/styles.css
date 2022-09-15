@@ -1,9 +1,15 @@
 :root{
 
 }
+h1{
+    margin: 5% auto;
+    text-align: center;
+}
 body{
     background-color: grey;
     color: white;
+    text-align: center;
+    margin: 0;
 }
 #start:hover{
     background-color: grey;
@@ -16,14 +22,14 @@ button:hover{
     color: aliceblue;
     width: 7rem;
     height: 4rem;
-    margin-left: 15rem;
+    margin: auto;
 }
 #game-grid{
     align-items: center;
-    margin: 75px 10% 200px 10%;
+    margin: 10% auto;
     display: grid;
-    width: 300px;
-    height: 300px;
+    width: 21rem;
+    height: 21rem;
 }
 #do{
     grid-column: 2;

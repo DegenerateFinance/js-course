@@ -3,6 +3,7 @@ const noteArray = [
         name: "do",
         color: "#E76F51",
         element: document.getElementById("do"),
+        /*sound: new Audio("/sounds/do.mp3"),*/
     },
     {
         name: "re",
@@ -21,10 +22,18 @@ const noteArray = [
     },
 ]
 const startButton = document.getElementById("start");
-
 console.log(noteArray, startButton);
 
-//startButton.addEventListener("click", gameLoop());
+const butter = document.querySelectorAll('.game-button')
+
+function playSound(){
+    new Audio('sounds/do.mp3').play();
+}
+
+butter.forEach(keys => {
+    keys.addEventListener("click", playSound);
+})
+
 function gameLoop(){
     console.log("now playing")
 }
