@@ -1,39 +1,19 @@
-const noteArray = [
-    {
-        name: "do",
-        color: "#E76F51",
-        element: document.getElementById("do"),
-        /*sound: new Audio("/sounds/do.mp3"),*/
-    },
-    {
-        name: "re",
-        color: "#F4A261",
-        element: document.getElementById("re"),
-    },
-    {
-        name: "mi",
-        color: "#E9C46A",
-        element: document.getElementById("mi"),
-    },
-    {
-        name: "fa",
-        color: "#2A9D8F",
-        element: document.getElementById("fa"),
-    },
-]
+const colorDo = "#E76F51";
+const colorRe = "#F4A261";
+const colorMi = "#E9C46A";
+const colorFa = "#2A9D8F";
 const startButton = document.getElementById("start");
-console.log(noteArray, startButton);
 
-const butter = document.querySelectorAll('.game-button')
+const gameButtons = document.querySelectorAll('.game-button')
+console.log(gameButtons);
 
-function playSound(){
-    new Audio('sounds/do.mp3').play();
-}
-
-butter.forEach(keys => {
-    keys.addEventListener("click", playSound);
+gameButtons.forEach(keys => {
+    const noteURL = "sounds/"+keys.id + ".mp3";
+    keys.addEventListener("click", ()=>playSound(noteURL));
 })
-
+function playSound(audioUrl){
+    new Audio(audioUrl).play();
+}
 function gameLoop(){
     console.log("now playing")
 }
