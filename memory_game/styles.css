@@ -53,3 +53,6 @@ button:hover{
     background-color: black;
     color: aliceblue;
 }
+.game-button:hover{
+    background-color: rgb(47, 47, 49);
+}
