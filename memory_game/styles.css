@@ -56,3 +56,15 @@ button:hover{
 .game-button:hover{
     background-color: rgb(47, 47, 49);
 }
+.doClicked{
+    background-color: #E76F51;
+}
+.reClicked{
+    background-color: #F4A261;
+}
+.miClicked{
+    background-color: #E9C46A;
+}
+.faClicked{
+    background-color: #2A9D8F;
+}
