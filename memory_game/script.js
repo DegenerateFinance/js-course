@@ -1,51 +1,69 @@
+//constants
 const gameButtons = document.querySelectorAll('.game-button');
 const startButton = document.getElementById("start");
-const colorDo = "#E76F51";
-const colorRe = "#F4A261";
-const colorMi = "#E9C46A";
-const colorFa = "#2A9D8F";
-function playKey(audioUrl, key){
-    new Audio(audioUrl).play();
-    let color;
-    switch(key.id){
-        case "do": color=colorDo;
-            break;
-        case "re": color=colorRe;
-            break;
-        case "mi": color=colorMi;
-            break;
-        default: color=colorFa;
+const keys = [
+    {
+        id: 0,
+        audioURL: 'sounds/do.mp3' ,
+        color: "#E76F51",
+        name: "do"
+    },
+    {
+        id: 1,
+        audioURL: 'sounds/re.mp3' ,
+        color: "#F4A261",
+        name: "re"
+    },
+    {
+        id: 2,
+        audioURL: 'sounds/mi.mp3' ,
+        color: "#E9C46A",
+        name: "mi"
+    },
+    {
+        id: 3,
+        audioURL: 'sounds/fa.mp3' ,
+        color: "#2A9D8F",
+        name: "fa"
     }
-    key.style.backgroundColor = color;
+]
 
-    /*change mouseup to wait some time */
-    delay(200).then(()=>key.style.backgroundColor= "black");
+startButton.addEventListener('click', gameLoop);
+
+//game loop
+async function gameLoop(){
+    let gameNotes = [];
+    
+    gameNotes.push(0,1,2,3,2,3);
+    
+    let passNotes=gameNotes.slice();    //shallow copy cuz arrays are passed by reference
+    await playNotes(passNotes);
+    
+
+    //playKey(0);
+
+    return
 }
+
+async function playNotes(playingNotes){
+    if(playingNotes.length>=1){
+        await playKey(playingNotes[0]);
+        playingNotes.shift();
+        await playNotes(playingNotes);
+    }
+    else{
+        return
+    }
+    
+}
+async function playKey(key){
+    myAudio = new Audio (keys[key].audioURL).play();
+    gameButtons[key].classList.add(keys[key].name+"Clicked");
+    await delay(600)
+    gameButtons[key].classList.remove(keys[key].name+"Clicked");
+    return
+}
+
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
-function gameLoop(){
-    console.log("now playing");
-    let noteOrder=[];
-    noteOrder.push(5);
-    noteOrder.push(5);
-    noteOrder.push(5);
-    noteOrder.push(5);
-    console.log(noteOrder, noteOrder.length);
-    noteOrder = computerPlay(noteOrder);
-    gameButtons.forEach(key => {
-        const noteURL = "sounds/"+key.id + ".mp3";
-        key.addEventListener("click", ()=>playKey(noteURL, key));
-    })
-}
-function playAnimation(noteNum){
-}
-function computerPlay(existingNotes){
-    for(let i=0;i<existingNotes.length;i++){
-        console.log(existingNotes[i], i);
-    }
-    
-    delay(5000).then(()=>console.log('timesUp!'));
-    return existingNotes
-}
-startButton.addEventListener('click', gameLoop);

@@ -28,47 +28,78 @@ const keys = [
     }
 ]
 
-//main
 startButton.addEventListener('click', gameLoop);
 
 //game loop
-function gameLoop(){
+async function gameLoop(){
+    startButton.removeEventListener('click', gameLoop);
+
     let gameNotes = [];
-
-    gameNotes=computerPlay(gameNotes);
-    delay(600*(gameNotes.length+1)).then(()=>userPlay(gameNotes));
+    let result= "playing";
+    gameNotes =  await computerPlay(gameNotes);
+    gameNotes =  await computerPlay(gameNotes);
     console.log(gameNotes);
+    result = await playerMatchMelody(gameNotes);
+
+
+    let passNotes=gameNotes.slice();    //shallow copy cuz arrays are passed by reference
+    
+    startButton.addEventListener('click', gameLoop);
     return
 }
-
-function computerPlay(computerNotes){
-    let newNote= Math.floor((Math.random()*4)); //rand 0 to 3
-    computerNotes.push(newNote);
-    playNotes(computerNotes);
-    return computerNotes;
+async function computerPlay(existingNotes){
+    existingNotes.push(Math.floor( Math.random()*4));
+    let passNotes=existingNotes.slice();    //shallow copy cuz arrays are passed by reference
+    await playNotes(passNotes);
+    return existingNotes;
 }
-function userPlay(compareNotes){
-    let userNotes=[];
-    console.log("playsth");
-    /*
-    gameButtons.forEach(gameElement=>{
-        gameButtons.addEventListener("click", )
-    })
-    */
-}
-function playNotes(playingNotes){
-    for(let i=0;i<playingNotes.length;i++){
-        delay(620*i).then(()=>playKey(playingNotes[i]));
+async function playerMatchMelody(existingNotes){
+    let result;
+    for(let i=0;i<existingNotes.length;i++){
+        result = await playerMatchNote(existingNotes[i])
+        if (result == "game over"){
+            return result;
+        }
     }
-    return
 }
+async function playerMatchNote(playingNote){
+    gameButtons.forEach(key => {
+        const noteURL = "sounds/"+key.id + ".mp3";
+        let keyId=0;
+        switch(key.id){
+            case "do": keyId=0;
+                break;
+            case "re": keyId=1;
+                break;
+            case "mi": keyId=2;
+                break;
+            default: keyId=3;
+        }
+        key.addEventListener("click", ()=>playKey(keyId));
+        //save
+        //if (playingNote != keyId)
+    })
 
-function playKey(key){
+}
+async function playNotes(playingNotes){
+    if(playingNotes.length>=1){
+        await playKey(playingNotes[0]);
+        playingNotes.shift();
+        await playNotes(playingNotes);
+    }
+    else{
+        return
+    }
+    
+}
+async function playKey(key){
     myAudio = new Audio (keys[key].audioURL).play();
     gameButtons[key].classList.add(keys[key].name+"Clicked");
-    delay(600).then(()=>gameButtons[key].classList.remove(keys[key].name+"Clicked"));
+    await delay(650)
+    gameButtons[key].classList.remove(keys[key].name+"Clicked");
+    await delay(250)
+    return
 }
-
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }

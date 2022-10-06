@@ -14,9 +14,6 @@ body{
 #start:hover{
     background-color: grey;
 }
-button:hover{
-    background-color: grey;
-}
 #start{
     background-color: black;
     color: aliceblue;
@@ -52,9 +49,6 @@ button:hover{
     height: 7rem;
     background-color: black;
     color: aliceblue;
-}
-.game-button:hover{
-    background-color: rgb(47, 47, 49);
 }
 .doClicked{
     background-color: #E76F51;
